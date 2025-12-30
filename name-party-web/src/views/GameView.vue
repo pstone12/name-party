@@ -19,8 +19,4 @@ defineProps({
 </template>
 
 <style scoped>
-#mainDiv {
-  font-weight: bold;
-  color: white;
-}
 </style>
