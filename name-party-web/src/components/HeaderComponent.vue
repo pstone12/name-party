@@ -1,26 +1,9 @@
-<script setup>
-import Cookies from 'js-cookie';
-import { ref } from 'vue';
-import { UserIcon } from '@heroicons/vue/24/outline';
-
-const playerName = ref(Cookies.get('playerName') || '');
-
-
-function showNameDialog(){ //TODO: Replace prompt with a proper modal
-  const newName = prompt("Enter your name:", playerName.value);
-  if (newName) {
-    playerName.value = newName;
-    Cookies.set('playerName', newName);
-  }
-}
-
-</script>
-
 <template>
   <header>
     <ul id="navLinks">
       <li><router-link to="/">Home</router-link></li>
       <li><router-link to="/game">Create</router-link></li>
+      <li><router-link to="/game/ABCD">ABCD</router-link></li> <!-- testing link -->
       <li><a href="https://github.com/pstone12/name-party" target="_blank">Github</a></li>
     </ul>
 
@@ -35,6 +18,24 @@ function showNameDialog(){ //TODO: Replace prompt with a proper modal
   </header>
 </template>
 
+<script setup>
+import Cookies from 'js-cookie';
+import { ref } from 'vue';
+import { UserIcon } from '@heroicons/vue/24/outline';
+
+const playerName = ref(Cookies.get('playerName') || '');
+
+
+function showNameDialog(){ // TODO: Replace prompt with a proper modal
+  const newName = prompt("Enter your name:", playerName.value);
+  if (newName) {
+    playerName.value = newName;
+    Cookies.set('playerName', newName);
+  }
+}
+
+</script>
+
 <style scoped>
 header {
   background-color: #333;
@@ -45,6 +46,7 @@ header {
   display: flex;
   flex-direction: row;
   align-items: center;
+  max-height: 3vh;
 }
 
 #navLinks {
