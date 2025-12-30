@@ -10,12 +10,23 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue'),
+      path: '/game',
+      name: 'create-game',
+      component: () => import('../views/CreateView.vue'),
+    },
+    {
+      path: '/game/:gameId',
+      name: 'game',
+      component: () => import('../views/GameView.vue'),
+      props: true,
+      beforeEnter: (to, from, next) => {
+        if (to.params.gameId === 'error') {
+          // TODO: Check if game exists and make fallback
+          next('/home')
+        } else {
+          next()
+        }
+      },
     },
   ],
 })

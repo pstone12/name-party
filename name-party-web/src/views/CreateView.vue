@@ -1,14 +1,16 @@
 <script setup>
 
+
 </script>
 
 <template>
   <main>
     <div>
-      Test
-    </div>
-    <div>
-      More content
+      <h2>Create a New Game</h2>
     </div>
   </main>
 </template>
+
+<style scoped>
+
+</style>
