@@ -1,8 +1,12 @@
 <script setup>
-import GameRulesComponent from '@/components/GameRulesComponent.vue';
-import GuessComponent from '@/components/GuessComponent.vue';
-import ImageComponent from '@/components/ImageComponent.vue';
-import PlayerListComponent from '@/components/PlayerListComponent.vue';
+import GameRulesComponent from '@/components/game-components/GameRulesComponent.vue';
+import GuessComponent from '@/components/game-components/GuessComponent.vue';
+import ImageComponent from '@/components/game-components/ImageComponent.vue';
+import PlayerListComponent from '@/components/game-components/PlayerListComponent.vue';
+import LoadingComponent from '@/components/icons/LoadingComponent.vue';
+
+import { ref, onMounted } from 'vue';
+
 
 defineProps({
   gameId: {
@@ -11,10 +15,19 @@ defineProps({
   }
 })
 
+const isGameReady = ref(false);
+
+onMounted(() => {
+  setTimeout(() => {
+    isGameReady.value = true;
+  }, 2000);
+});
+
+
 </script>
 
 <template>
-  <main>
+  <main v-if="isGameReady">
     <GameRulesComponent />
 
     <div id="game-area">
@@ -24,6 +37,9 @@ defineProps({
 
     <PlayerListComponent :gameId="gameId" />
   </main>
+  <div id="loading" v-else>
+    <LoadingComponent size="50" />
+  </div>
 </template>
 
 <style scoped>
@@ -35,8 +51,6 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: calc(100vh - 5vh);
-  /* Adjust for header height */
 }
 
 main>* {
@@ -50,5 +64,12 @@ main>* {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+}
+
+#loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>
