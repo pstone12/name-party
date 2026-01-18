@@ -10,7 +10,7 @@
   inset: 0;
   z-index: -1;
   overflow: hidden;
-  background-color: #0f1115;
+  background-color: #1c1c1c;
   /* dark neutral grey */
 }
 

@@ -38,7 +38,7 @@ onMounted(() => {
     <PlayerListComponent :gameId="gameId" />
   </main>
   <div id="loading" v-else>
-    <LoadingComponent size="50" />
+    <LoadingComponent :size="50" />
   </div>
 </template>
 
