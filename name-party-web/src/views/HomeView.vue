@@ -1,13 +1,19 @@
 <script setup>
-import { ref } from 'vue';
-import router from '../router/'
+import { ref, watch } from 'vue';
+import router from '../router/';
 
 
+const existingGameId = ref('');
 
+watch(existingGameId, (newValue) => {
+  newValue = newValue.replace(/^[A-Z]{0,4}$/gm, '').toUpperCase();
+  existingGameId.value = newValue.slice(0, 4);
+});
 
-const existingGameId = ref('Hello');
+// What the fuck ^^^
 
 </script>
+
 
 <template>
   <main>
@@ -16,7 +22,7 @@ const existingGameId = ref('Hello');
     <div class="select-game">
       <v-card class="w-500">
         <v-card-title>New Game</v-card-title>
-        <v-card-text >
+        <v-card-text>
           Create a new game to get started.
         </v-card-text>
         <v-card-actions>
@@ -31,7 +37,12 @@ const existingGameId = ref('Hello');
       <v-card>
         <v-card-title>Join Existing Game</v-card-title>
         <v-card-text>
-          <v-text-field @keydown.enter="router.push(`/game/${existingGameId}`)" v-model="existingGameId" label="Enter Game ID" width="300px" />
+          <v-text-field
+          @keydown.enter="router.push(`/game/${existingGameId}`)"
+          v-model="existingGameId"
+          label="Enter Game ID" width="300px"
+          maxlength="4"
+          />
         </v-card-text>
       </v-card>
     </div>
